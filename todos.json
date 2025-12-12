@@ -1,0 +1,19 @@
+{
+  "all_tasks": [
+    {
+      "id": 1,
+      "message": "Zgoonuj",
+      "status": "Done"
+    },
+    {
+      "id": 2,
+      "message": "Coś pożytecznego",
+      "status": "Done"
+    },
+    {
+      "id": 3,
+      "message": "Zgoonuj do Binia",
+      "status": "InProgress"
+    }
+  ]
+}
