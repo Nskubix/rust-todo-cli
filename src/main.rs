@@ -1,5 +1,5 @@
+use chrono::{DateTime, Local, Utc, serde::ts_seconds};
 use serde::{Deserialize, Serialize};
-
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 enum Status {
     Done,
@@ -11,6 +11,8 @@ struct Task {
     id: i32,
     message: String,
     status: Status,
+    #[serde(with = "ts_seconds")]
+    created_at: DateTime<Utc>,
 }
 impl Task {
     fn update(&mut self, message: String) {
@@ -21,8 +23,11 @@ impl Task {
     }
     fn display(&self) {
         println!(
-            "Task id:{} | status: {:?} | {}",
-            self.id, self.status, self.message
+            "Task id:{} | status: {:?} | {} \n{}",
+            self.id,
+            self.status,
+            self.created_at.with_timezone(&Local),
+            self.message
         );
     }
 }
@@ -42,6 +47,7 @@ impl TaskHolder {
             id,
             message: msg,
             status: Status::ToDo,
+            created_at: Utc::now(),
         });
     }
 
